@@ -9,15 +9,18 @@ den = (0, 0, 0)
 do = (255, 0, 0)
 xam = (20, 20, 30)
 vang = (255, 255, 0)
-xanh_la = (0, 255, 0)
+xanh_la = (96, 165, 111)
 xanh_duong = (0, 0, 255)
+xanh_duong_nhat = (226, 247, 184)
+DarkOrange = (255, 140, 0)
+Brown = (165, 42, 42)
 
 # Thiết lập cửa sổ của game
 chieu_rong_cua_so = 800
 chieu_cao_cua_so = 600
 cua_so = pygame.display.set_mode((chieu_rong_cua_so, chieu_cao_cua_so))
 pygame.display.set_caption('Game Con Rắn - Nhóm 2')
-font_tieng_viet = "NotoSans-Regular.ttf"
+font_tieng_viet = "FS-Ariston-Base.ttf"
 kieu_font = pygame.font.Font(font_tieng_viet, 30)
 
 # Vị trí ban đầu con rắn xuất hiện
@@ -40,12 +43,15 @@ moi_x = round(random.randrange(kich_thuoc_khung_vien,
 moi_y = round(random.randrange(kich_thuoc_khung_vien,
                                chieu_cao_cua_so - kich_thuoc_khung_vien - kich_thuoc_o_vuong) / kich_thuoc_o_vuong) * kich_thuoc_o_vuong
 
+
 # Hàm để vẽ con rắn trên màn hình
 def ve_ran(danh_sach_ran):
     for x in danh_sach_ran[:-1]:  # Vẽ thân rắn (trừ đầu)
         pygame.draw.rect(cua_so, xanh_la, [x[0], x[1], kich_thuoc_o_vuong, kich_thuoc_o_vuong])
     # Vẽ đầu rắn màu xanh dương để phân biệt
-    pygame.draw.rect(cua_so, xanh_duong, [danh_sach_ran[-1][0], danh_sach_ran[-1][1], kich_thuoc_o_vuong, kich_thuoc_o_vuong])
+    pygame.draw.rect(cua_so, xanh_duong,
+                     [danh_sach_ran[-1][0], danh_sach_ran[-1][1], kich_thuoc_o_vuong, kich_thuoc_o_vuong])
+
 
 # Tốc độ khung hình
 dong_ho = pygame.time.Clock()
@@ -58,17 +64,45 @@ chieu_dai_ran = 3
 # Trạng thái trò chơi
 tro_choi_ket_thuc = False
 tro_choi_dong_cua = False
+tro_choi_bat_dau = False
 diem = 0
+
+
+def thong_bao(thong_diep, mau_sac):
+    tin_nhan = kieu_font.render(thong_diep, True, mau_sac)  # Tạo thông báo với font chữ và màu sắc
+    vi_tri_tin_nhan = tin_nhan.get_rect(
+        center=(chieu_rong_cua_so / 2, chieu_cao_cua_so / 2))  # Đặt thông báo ở giữa màn hình
+    cua_so.blit(tin_nhan, vi_tri_tin_nhan)  # Vẽ thông báo lên màn hình
+
+
+while not tro_choi_bat_dau:
+    cua_so.fill(DarkOrange)  # Điền nền bằng màu xám
+    thong_bao("Nhấn một phím bất kỳ để bắt đầu", Brown)  # Hiển thị thông báo chờ
+    pygame.display.update()  # Cập nhật màn hình
+
+    # Xử lý các sự kiện
+    for su_kien in pygame.event.get():
+        if su_kien.type == pygame.QUIT:  # Nếu người chơi đóng cửa sổ
+            tro_choi_ket_thuc = True  # Kết thúc trò chơi
+            tro_choi_bat_dau = True  # Dừng vòng lặp chờ
+        if su_kien.type == pygame.KEYDOWN:  # Nếu người chơi nhấn phím bất kỳ
+            tro_choi_bat_dau = True  # Bắt đầu trò chơi
 
 # Vòng lặp chính của trò chơi
 while not tro_choi_ket_thuc:
     while tro_choi_dong_cua:
-        cua_so.fill(xam)
+        cua_so.fill(DarkOrange)
 
         # Hiển thị thông báo thua
-        thong_bao1 = kieu_font.render("Bạn đã thua! Nhấn Enter để chơi lại hoặc Space để thoát.", True, do)
+        thong_bao1 = kieu_font.render("Bạn đã thua! Nhấn Enter để chơi lại hoặc Space để thoát.", True, Brown)
+
+
+
         vi_tri_tin_nhan1 = thong_bao1.get_rect(center=(chieu_rong_cua_so / 2, chieu_cao_cua_so / 2 - 40))
+
+
         cua_so.blit(thong_bao1, vi_tri_tin_nhan1)
+
         pygame.display.update()
 
         # Kiểm tra sự kiện phím khi trò chơi kết thúc
@@ -133,11 +167,11 @@ while not tro_choi_ket_thuc:
             tro_choi_dong_cua = True
 
     # Vẽ khung viền và điểm số
-    cua_so.fill(xam)
-    pygame.draw.rect(cua_so, trang,
-                     [kich_thuoc_khung_vien, kich_thuoc_khung_vien, chieu_rong_vung_choi, chieu_cao_vung_choi], 2)
-    gia_tri_diem = kieu_font.render("Điểm: " + str(diem), True, vang)
-    cua_so.blit(gia_tri_diem, [0, kich_thuoc_khung_vien / 2 - gia_tri_diem.get_height() / 2])
+    cua_so.fill(xanh_duong_nhat)
+    pygame.draw.rect(cua_so, Brown,
+                     [kich_thuoc_khung_vien, kich_thuoc_khung_vien, chieu_rong_vung_choi, chieu_cao_vung_choi], 4)
+    gia_tri_diem = kieu_font.render("Điểm: " + str(diem), True, Brown)
+    cua_so.blit(gia_tri_diem, [10, kich_thuoc_khung_vien / 2 - gia_tri_diem.get_height() / 2])
 
     # Vẽ mồi
     pygame.draw.rect(cua_so, do, [moi_x, moi_y, kich_thuoc_o_vuong, kich_thuoc_o_vuong])
