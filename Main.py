@@ -3,7 +3,7 @@ import random
 
 pygame.init()
 
-# Màu sắc cho game
+# Màu sắc trong game
 trang = (255, 255, 255)
 den = (0, 0, 0)
 do = (255, 0, 0)
