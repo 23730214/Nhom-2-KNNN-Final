@@ -71,24 +71,23 @@ diem = 0
 
 
 def thong_bao(thong_diep, mau_sac):
-    tin_nhan = kieu_font.render(thong_diep, True, mau_sac)  # Tạo thông báo với font chữ và màu sắc
+    tin_nhan = kieu_font.render(thong_diep, True, mau_sac)   
     vi_tri_tin_nhan = tin_nhan.get_rect(
-        center=(chieu_rong_cua_so / 2, chieu_cao_cua_so / 2))  # Đặt thông báo ở giữa màn hình
-    cua_so.blit(tin_nhan, vi_tri_tin_nhan)  # Vẽ thông báo lên màn hình
-
+        center=(chieu_rong_cua_so / 2, chieu_cao_cua_so / 2))
+    cua_so.blit(tin_nhan, vi_tri_tin_nhan)
 
 while not tro_choi_bat_dau:
-    cua_so.fill(DarkOrange)  # Điền nền bằng màu xám
+    cua_so.fill(DarkOrange)
     thong_bao("Nhấn một phím bất kỳ để bắt đầu", Brown)  # Hiển thị thông báo chờ
-    pygame.display.update()  # Cập nhật màn hình
+    pygame.display.update()
 
     # Xử lý các sự kiện
     for su_kien in pygame.event.get():
-        if su_kien.type == pygame.QUIT:  # Nếu người chơi đóng cửa sổ
-            tro_choi_ket_thuc = True  # Kết thúc trò chơi
-            tro_choi_bat_dau = True  # Dừng vòng lặp chờ
-        if su_kien.type == pygame.KEYDOWN:  # Nếu người chơi nhấn phím bất kỳ
-            tro_choi_bat_dau = True  # Bắt đầu trò chơi
+        if su_kien.type == pygame.QUIT:
+            tro_choi_ket_thuc = True
+            tro_choi_bat_dau = True
+        if su_kien.type == pygame.KEYDOWN:
+            tro_choi_bat_dau = True
 
 # Vòng lặp chính của trò chơi
 while not tro_choi_ket_thuc:
@@ -96,7 +95,7 @@ while not tro_choi_ket_thuc:
         cua_so.fill(DarkOrange)
 
         # Hiển thị thông báo thua
-        thong_bao1 = kieu_font.render("Bạn đã thua! Nhấn Enter để chơi lại hoặc Space để thoát.", True, Brown)
+        thong_bao1 = kieu_font.render("Bạn đã thua!", True, Brown)
         thong_bao2 = kieu_font.render("Điểm của bạn: " + str(diem), True, vang)
         thong_bao3 = kieu_font.render("Nhấn Enter để chơi lại hoặc Space để thoát", True, vang)
 
