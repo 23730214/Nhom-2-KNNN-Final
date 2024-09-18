@@ -7,7 +7,6 @@ pygame.init()
 trang = (255, 255, 255)
 den = (0, 0, 0)
 do = (255, 0, 0)
-xam = (20, 20, 30)
 vang = (255, 255, 0)
 xanh_la = (96, 165, 111)
 xanh_duong = (0, 0, 255)
@@ -119,15 +118,6 @@ while not tro_choi_ket_thuc:
                     tro_choi_dong_cua = False
                     x1 = chieu_rong_cua_so // 2
                     y1 = chieu_cao_cua_so // 2
-                    x1_thay_doi = kich_thuoc_o_vuong
-                    y1_thay_doi = 0
-                    danh_sach_ran = []
-                    chieu_dai_ran = 3
-                    diem = 0
-                    moi_x = round(random.randrange(kich_thuoc_khung_vien,
-                                                   chieu_rong_cua_so - kich_thuoc_khung_vien - kich_thuoc_o_vuong) / kich_thuoc_o_vuong) * kich_thuoc_o_vuong
-                    moi_y = round(random.randrange(kich_thuoc_khung_vien,
-                                                   chieu_cao_cua_so - kich_thuoc_khung_vien - kich_thuoc_o_vuong) / kich_thuoc_o_vuong) * kich_thuoc_o_vuong
                 elif su_kien.key == pygame.K_SPACE:  # Nhấn Space để thoát
                     tro_choi_ket_thuc = True
                     tro_choi_dong_cua = False
@@ -187,10 +177,8 @@ while not tro_choi_ket_thuc:
     # Kiểm tra nếu rắn ăn mồi
     if x1 == moi_x and y1 == moi_y:
         diem += 1
-        moi_x = round(random.randrange(kich_thuoc_khung_vien,
-                                       chieu_rong_cua_so - kich_thuoc_khung_vien - kich_thuoc_o_vuong) / kich_thuoc_o_vuong) * kich_thuoc_o_vuong
-        moi_y = round(random.randrange(kich_thuoc_khung_vien,
-                                       chieu_cao_cua_so - kich_thuoc_khung_vien - kich_thuoc_o_vuong) / kich_thuoc_o_vuong) * kich_thuoc_o_vuong
+        moi_x = round(random.randrange(kich_thuoc_khung_vien, chieu_rong_cua_so - kich_thuoc_khung_vien - kich_thuoc_o_vuong) / kich_thuoc_o_vuong) * kich_thuoc_o_vuong
+        moi_y = round(random.randrange(kich_thuoc_khung_vien, chieu_cao_cua_so - kich_thuoc_khung_vien - kich_thuoc_o_vuong) / kich_thuoc_o_vuong) * kich_thuoc_o_vuong
         chieu_dai_ran += 1
         tep_am_thanh.play()
 
