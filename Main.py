@@ -118,6 +118,11 @@ while not tro_choi_ket_thuc:
                     tro_choi_dong_cua = False
                     x1 = chieu_rong_cua_so // 2
                     y1 = chieu_cao_cua_so // 2
+                    danh_sach_ran = []
+                    chieu_dai_ran = 3
+                    diem = 0
+                    x1_thay_doi = kich_thuoc_o_vuong
+                    y1_thay_doi = 0
                 elif su_kien.key == pygame.K_SPACE:  # Nhấn Space để thoát
                     tro_choi_ket_thuc = True
                     tro_choi_dong_cua = False
